@@ -1,61 +1,29 @@
-const Posts = require("../models/post.js");
+import { Request, Response } from 'express';
+import Post from '../models/post';
 
-const createPost = async (req, res) => {
+// Create a new post
+export const createPost = async (req: Request, res: Response) => {
+  const { title, content } = req.body;
+
+  if (!title || !content) {
+    return res.status(400).json({ message: 'Title and content are required' });
+  }
+
   try {
-    const post = await Posts.create({
-      title: req.body.title,
-      content: req.body.content,
-      sender: req.body.sender,
-    });
-    res.status(200).json(post);
+    const newPost = new Post({ title, content });
+    await newPost.save();
+    return res.status(201).json(newPost);
   } catch (error) {
-    res.status(500).send("Error creating post", error);
+    return res.status(500).json({ message: 'Error creating post', error });
   }
 };
 
-const getPostById = async (req, res) => {
-  const id = req.params.id;
-
+// Get all posts
+export const getPosts = async (req: Request, res: Response) => {
   try {
-    const post = await Posts.findById(id);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-    res.status(200).json(post);
+    const posts = await Post.find();
+    return res.status(200).json(posts);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching post", error });
+    return res.status(500).json({ message: 'Error fetching posts', error });
   }
 };
-
-const getPosts = async (req, res) => {
-  try {
-    if (req.query.sender) {
-      posts = await Posts.find({ sender: req.query.sender });
-    } else {
-      posts = await Posts.find();
-    }
-    res.status(200).json(posts);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching Posts", error });
-  }
-};
-
-const updatePost = async (req, res) => {
-  const id = req.params.id;
-  const { title, content, sender } = req.body;
-  try {
-    const updatedPost = await Posts.findByIdAndUpdate(
-      id,
-      { title, content, sender },
-      { new: true }
-    );
-    if (!updatedPost) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-    res.status(200).json(updatedPost);
-  } catch (error) {
-    res.status(500).json({ message: "Error updating post", error });
-  }
-};
-
-module.exports = { createPost, getPosts, getPostById, updatePost };
