@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import postRoutes from './routes/posts_route';
+import postRoutes from './routes/post_route';
 import commentRoutes from './routes/comment_route';
 import connectDB from './config/db';
 
