@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
 const router = Router();
-const commentsController = require("../controllers/comment");
+const CommentController = require("../controllers/comment");
 
-// Route to create a new comment
-router.post('/', commentsController.createComment);
-
-// Route to get comments for a specific post
-router.get('/:postId', commentsController.getComments);
+router.post('/', CommentController.createComment);
+router.get('/', CommentController.getComments);
+router.get('/:id', CommentController.getCommentById);
+router.put('/:id', CommentController.updateComment);
+router.delete('/:id', CommentController.deleteComment);
 
 export default router;

@@ -8,8 +8,15 @@ export interface Comment extends Document {
 
 // Define the Comment schema
 const commentSchema: Schema = new Schema({
-  postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
-  text: { type: String, required: true },
+  postId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Post',
+    required: true 
+  },
+  text: { 
+    type: String, 
+    required: true 
+  },
 });
 
 // Create and export the Comment model

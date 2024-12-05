@@ -8,8 +8,14 @@ export interface Post extends Document {
 
 // Define the Post schema
 const postSchema: Schema = new Schema({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
+  title: { 
+    type: String,
+    required: true 
+  },
+  content: { 
+    type: String,
+    required: true 
+  },
 });
 
 // Create and export the Post model
