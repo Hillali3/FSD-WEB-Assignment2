@@ -1,86 +1,34 @@
-const Comment = require('../models/comment');
+import { Request, Response } from 'express';
+import Comment from '../models/comment';
 
-// READ all comments
-const getComments = async (req, res) => {
+// Create a new comment
+export const createComment = async (req: Request, res: Response) => {
+  const { postId, text } = req.body;
+
+  if (!postId || !text) {
+    return res.status(400).json({ message: 'Post ID and text are required' });
+  }
+
   try {
-    const comments = await Comment.find();
-    res.status(200).json(comments);
+    const newComment = new Comment({ postId, text });
+    await newComment.save();
+    return res.status(201).json(newComment);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching comments', error });
+    return res.status(500).json({ message: 'Error creating comment', error });
   }
 };
 
-// READ a single comment by ID
-const getCommentById = async (req, res) => {
-  const { id } = req.params;
+// Get comments for a specific post
+export const getComments = async (req: Request, res: Response) => {
+  const postId = req.params.postId;
 
   try {
-    const comment = await Comment.findById(id);
-    if (!comment) {
-      return res.status(404).json({ message: 'Comment not found' });
+    const comments = await Comment.find({ postId });
+    if (comments.length === 0) {
+      return res.status(404).json({ message: 'No comments found for this post' });
     }
-    res.status(200).json(comment);
+    return res.status(200).json(comments);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching comment', error });
+    return res.status(500).json({ message: 'Error fetching comments', error });
   }
 };
-
-// CREATE a new comment
-const createComment = async (req, res) => {
-    const { content, author } = req.body;
-  
-    try {
-      const newComment = new Comment({
-        content,
-        author,
-      });
-  
-      await newComment.save();
-      res.status(201).json(newComment);
-    } catch (error) {
-      res.status(500).json({ message: 'Error creating comment', error });
-    }
-  };
-
-  // UPDATE a comment by ID
-const updateComment = async (req, res) => {
-  const { id } = req.params;
-  const { content, author } = req.body;
-
-  try {
-    const updatedComment = await Comment.findByIdAndUpdate(
-      id,
-      { content, author },
-      { new: true }
-    );
-    if (!updatedComment) {
-      return res.status(404).json({ message: 'Comment not found' });
-    }
-    res.status(200).json(updatedComment);
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating comment', error });
-  }
-};
-
-// DELETE a comment by ID
-const deleteComment = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const deletedComment = await Comment.findByIdAndDelete(id);
-    if (!deletedComment) {
-      return res.status(404).json({ message: 'Comment not found' });
-    }
-    res.status(200).json({ message: 'Comment deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting comment', error });
-  }
-};
-
-module.exports = { 
-  getComments,
-  getCommentById,
-  createComment,
-  updateComment,
-  deleteComment
-}; 
