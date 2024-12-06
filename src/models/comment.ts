@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 // Define the Comment interface
 export interface Comment extends Document {
@@ -10,19 +10,19 @@ export interface Comment extends Document {
 
 // Define the Comment schema
 const commentSchema: Schema = new Schema({
-  postId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Post',
-    required: true 
+  postId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Post",
+    required: true,
   },
-  user: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
-    required: true 
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
-  text: { 
-    type: String, 
-    required: true 
+  text: {
+    type: String,
+    required: true,
   },
   creationDate: {
     type: Date,
@@ -31,5 +31,5 @@ const commentSchema: Schema = new Schema({
 });
 
 // Create and export the Comment model
-const Comment = mongoose.model<Comment>('Comment', commentSchema);
+const Comment = mongoose.model<Comment>("Comment", commentSchema);
 export default Comment;

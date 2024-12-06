@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 // Define the Post interface
 export interface Post extends Document {
@@ -10,18 +10,18 @@ export interface Post extends Document {
 
 // Define the Post schema
 const postSchema: Schema = new Schema({
-  user: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
-    required: true 
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
-  title: { 
+  title: {
     type: String,
-    required: true 
+    required: true,
   },
-  content: { 
+  content: {
     type: String,
-    required: true 
+    required: true,
   },
   creationDate: {
     type: Date,
@@ -30,5 +30,5 @@ const postSchema: Schema = new Schema({
 });
 
 // Create and export the Post model
-const Post = mongoose.model<Post>('Post', postSchema);
+const Post = mongoose.model<Post>("Post", postSchema);
 export default Post;
