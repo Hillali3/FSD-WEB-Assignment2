@@ -3,8 +3,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 // Define the Post interface
 export interface Post extends Document {
   user: mongoose.Schema.Types.ObjectId;
-  title: string;
-  content: string;
+  title: String;
+  content: String;
   creationDate: Date;
 }
 
