@@ -7,6 +7,7 @@ export interface User extends Document {
   email: String;
   password: String;
   birthDate: Date;
+  tokens: [String];
 }
 
 // Define the user schema
