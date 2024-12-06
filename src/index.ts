@@ -4,6 +4,7 @@ import commentRoutes from './routes/comment_route';
 import userRoutes from './routes/user_route';
 import authRoutes from './routes/auth_route';
 import connectDB from './config/db';
+import setupSwaggerDocs from './swagger';
 require("dotenv").config();
 
 const app = express();
@@ -14,6 +15,9 @@ connectDB();
 
 // Middleware to parse JSON request body
 app.use(express.json());
+
+// Use Swagger docs
+setupSwaggerDocs(app);
 
 // Register routes
 app.use('/auth', authRoutes);
