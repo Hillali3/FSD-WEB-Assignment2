@@ -30,7 +30,7 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 // Get user by id
-const getUserById = async (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -49,8 +49,8 @@ const getUserById = async (req: Request, res: Response) => {
 };
 
 // Get user by username
-const getUserByUsername = async (req: Request, res: Response) => {
-  const username = req.params.username;
+export const getUserByUsername = async (req: Request, res: Response) => {
+  const {username} = req.params;
 
   try {
     const user = await User.find({ username });
@@ -64,7 +64,7 @@ const getUserByUsername = async (req: Request, res: Response) => {
 };
 
 //update user by id
-const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
   const id = req.params.id;
   const  { name, password, email, birthDate } = req.body;
 
@@ -89,10 +89,10 @@ const updateUser = async (req: Request, res: Response) => {
 
 // Delete user by id
 export const deleteUser = async (req: Request, res: Response) => {
-  const userId = req.params.userId;
+  const id = req.params.id;
 
   try {
-    const deletedUser = await User.findByIdAndDelete(userId);
+    const deletedUser = await User.findByIdAndDelete(id);
     
     if (!deletedUser) {
       return res.status(404).json({ message: 'User not found' });

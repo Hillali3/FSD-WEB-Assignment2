@@ -79,6 +79,30 @@ Content-Type: application/json
 // GET all users
 GET http://localhost:3000/users/
 
+// GET user by id
+GET http://localhost:3000/users/id/6753073ddf45a0a620ea75eb
+
+###
+// GET user by username
+GET http://localhost:3000/users/username/aviv.ohana
+
+###
+// UPDATE comment by id
+PUT http://localhost:3000/users/6753074fdf45a0a620ea75f1
+Content-Type: application/json
+
+{
+    "username": "new.ohana",
+    "name": "aviv",
+    "email": "bla2",
+    "password": "password"
+}
+
+###
+// DELETE comment by id
+DELETE  http://localhost:3000/users/67530ab3560b58a4bee1b3fd
+Content-Type: application/json
+
 ###
 //login
 POST http://localhost:3000/auth/login
