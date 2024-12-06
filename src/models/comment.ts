@@ -3,7 +3,9 @@ import mongoose, { Document, Schema } from 'mongoose';
 // Define the Comment interface
 export interface Comment extends Document {
   postId: mongoose.Schema.Types.ObjectId;
+  user: mongoose.Schema.Types.ObjectId;
   text: string;
+  creationDate: Date;
 }
 
 // Define the Comment schema
@@ -13,9 +15,18 @@ const commentSchema: Schema = new Schema({
     ref: 'Post',
     required: true 
   },
+  user: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User',
+    required: true 
+  },
   text: { 
     type: String, 
     required: true 
+  },
+  creationDate: {
+    type: Date,
+    default: Date.now,
   },
 });
 

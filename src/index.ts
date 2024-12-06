@@ -3,9 +3,10 @@ import postRoutes from './routes/post_route';
 import commentRoutes from './routes/comment_route';
 import userRoutes from './routes/user_route';
 import connectDB from './config/db';
+require("dotenv").config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 // Connect to MongoDB
 connectDB();
