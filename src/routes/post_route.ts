@@ -9,19 +9,19 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
     postController.getPosts(req, res);
 });
-router.get("/id/:id", (req, res) => {
+router.get("/", (req, res) => {
     postController.getPostById(req, res);
 });
-router.get("/userId/:userId", (req, res) => {
+router.get("/", (req, res) => {
     postController.getPostByUserId(req, res);
 });
-router.get("/username/:username", (req, res) => {
+router.get("/", (req, res) => {
     postController.getPostByUsername(req, res);
 });
-router.put("/:id", (req, res) => {
+router.put("/", (req, res) => {
     postController.updatePost(req, res);
 });
-router.delete("/:id", (req, res) => {
+router.delete("/", (req, res) => {
     postController.deletePost(req, res);
 });
 

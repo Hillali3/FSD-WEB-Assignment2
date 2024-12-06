@@ -6,16 +6,16 @@ const CommentController = require("../controllers/comment");
 router.post("/", (req, res) => {
     CommentController.createComment(req, res);
 });
-router.get("/id/:id", (req, res) => {
+router.get("/", (req, res) => {
     CommentController.getCommentById(req, res);
 });
-router.get("/postId/:postId", (req, res) => {
+router.get("/", (req, res) => {
     CommentController.getCommentsByPost(req, res);
 });
-router.put("/:id", (req, res) => {
+router.put("/", (req, res) => {
     CommentController.updateComment(req, res);
 });
-router.delete("/:id", (req, res) => {
+router.delete("/", (req, res) => {
     CommentController.deleteComment(req, res);
 });
 

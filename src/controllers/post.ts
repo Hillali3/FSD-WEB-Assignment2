@@ -30,7 +30,7 @@ export const getPosts = async (req: Request, res: Response) => {
 };
 
 // Get post by id
-export const getPostById = async (req: Request, res: Response) => {
+const getPostById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -49,7 +49,7 @@ export const getPostById = async (req: Request, res: Response) => {
 };
 
 // Get all posts by by user id
-export const getPostByUserId = async (req: Request, res: Response) => {
+const getPostByUserId = async (req: Request, res: Response) => {
   const userId = req.params.userId;
 
   try {
@@ -64,7 +64,7 @@ export const getPostByUserId = async (req: Request, res: Response) => {
 };
 
 // Get all posts by by username
-export const getPostByUsername = async (req: Request, res: Response) => {
+const getPostByUsername = async (req: Request, res: Response) => {
   const username = req.params.username;
 
   try {
@@ -79,7 +79,7 @@ export const getPostByUsername = async (req: Request, res: Response) => {
 };
 
 //update post by id
-export const updatePost = async (req: Request, res: Response) => {
+const updatePost = async (req: Request, res: Response) => {
   const id = req.params.id;
   const { title, content, sender } = req.body;
 
