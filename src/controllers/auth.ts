@@ -72,11 +72,35 @@ export const login = async (req: Request, res: Response) => {
 
 // Logout (Invalidate the refresh token)
 export const logout = async (req: Request, res: Response) => {
-  // In a real-world scenario, you may invalidate the refresh token (e.g., remove from DB or store in blacklist)
+  const token = req.header("Authorization")?.replace("Bearer ", "");
+  if (!token) {
+    return res.status(403).json({ message: "Access denied" });
+  }
+
+  try {
+    const decoded = verifyRefreshToken(token);
+    const userId = typeof decoded === "string" ? decoded : decoded.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(403).json({ message: "Invalid request" });
+    }
+
+    if (!user.tokens.includes(token)) {
+      user.tokens = [""]; // Clear all tokens
+      await user.save();
+      return res.status(403).json({ message: "Invalid request" });
+    }
+
+    user.tokens.splice(user.tokens.indexOf(token), 1);
+    await user.save();
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    res.status(403).json({ message: "Invalid or expired token" });
+  }
 };
 
-// Refresh Access Token
-export const refreshAccessToken = async (req: Request, res: Response) => {
+// Refresh Token
+export const refreshToken = async (req: Request, res: Response) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
