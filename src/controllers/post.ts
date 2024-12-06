@@ -1,13 +1,15 @@
-import { Request, Response } from 'express';
-import Post from '../models/post';
-import mongoose from 'mongoose';
+import { Request, Response } from "express";
+import Post from "../models/post";
+import mongoose from "mongoose";
 
 // Create a new post
 export const createPost = async (req: Request, res: Response) => {
   const { userId, title, content } = req.body;
 
   if (!userId || !title || !content) {
-    return res.status(400).json({ message: 'UserId, title and content are required' });
+    return res
+      .status(400)
+      .json({ message: "UserId, title and content are required" });
   }
 
   try {
@@ -15,7 +17,7 @@ export const createPost = async (req: Request, res: Response) => {
     await newPost.save();
     return res.status(201).json(newPost);
   } catch (error) {
-    return res.status(500).json({ message: 'Error creating post', error });
+    return res.status(500).json({ message: "Error creating post", error });
   }
 };
 
@@ -25,7 +27,7 @@ export const getPosts = async (req: Request, res: Response) => {
     const posts = await Post.find();
     return res.status(200).json(posts);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching posts', error });
+    return res.status(500).json({ message: "Error fetching posts", error });
   }
 };
 
@@ -55,11 +57,11 @@ export const getPostByUserId = async (req: Request, res: Response) => {
   try {
     const posts = await Post.find({ userId });
     if (posts.length === 0) {
-      return res.status(404).json({ message: 'No posts found for this user' });
+      return res.status(404).json({ message: "No posts found for this user" });
     }
     return res.status(200).json(posts);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching posts', error });
+    return res.status(500).json({ message: "Error fetching posts", error });
   }
 };
 
@@ -70,11 +72,13 @@ export const getPostByUsername = async (req: Request, res: Response) => {
   try {
     const posts = await Post.find({ username });
     if (posts.length === 0) {
-      return res.status(404).json({ message: 'No posts found for this username' });
+      return res
+        .status(404)
+        .json({ message: "No posts found for this username" });
     }
     return res.status(200).json(posts);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching posts', error });
+    return res.status(500).json({ message: "Error fetching posts", error });
   }
 };
 
@@ -86,7 +90,7 @@ export const updatePost = async (req: Request, res: Response) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid id" });
   }
-  
+
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       id,
@@ -108,13 +112,13 @@ export const deletePost = async (req: Request, res: Response) => {
 
   try {
     const deletedPost = await Post.findByIdAndDelete(postId);
-    
+
     if (!deletedPost) {
-      return res.status(404).json({ message: 'Post not found' });
+      return res.status(404).json({ message: "Post not found" });
     }
 
-    return res.status(200).json({ message: 'Post deleted successfully' });
+    return res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
-    return res.status(500).json({ message: 'Error deleting post', error });
+    return res.status(500).json({ message: "Error deleting post", error });
   }
 };
