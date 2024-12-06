@@ -12,5 +12,8 @@ router.post("/register", (req, res) => {
 router.post("/logout", (req, res) => {
     authController.logout(req, res);
 });
+router.post("/refreshToken", (req, res) => {
+    authController.refreshToken(req, res);
+});
 
 export default router;
