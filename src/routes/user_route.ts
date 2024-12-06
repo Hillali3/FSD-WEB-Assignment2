@@ -9,16 +9,16 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
     UserController.getUsers(req, res);
 });
-router.get("/", (req, res) => {
+router.get("/id/:id", (req, res) => {
     UserController.getUserById(req, res);
 });
-router.get("/", (req, res) => {
+router.get("/username/:username", (req, res) => {
     UserController.getUserByUsername(req, res);
 });
-router.put("/", (req, res) => {
+router.put("/:id", (req, res) => {
     UserController.updateUser(req, res);
 });
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
     UserController.deleteUser(req, res);
 });
 
