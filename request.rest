@@ -6,8 +6,9 @@ Content-Type: application/json
 {
     "title": "test_title2",
     "content": "test_content",
-    "sender": "bla"
+    "userId": "bla"
 }
+
 ###
 // GET all posts
 GET http://localhost:3000/posts/
@@ -62,8 +63,21 @@ Content-Type: application/json
 DELETE  http://localhost:3000/comments/6751ccd6764d3be8c8593a03
 Content-Type: application/json
 
+###
+//CREATE new User
+POST http://localhost:3000/users
+Content-Type: application/json
 
+{
+    "username": "hila.ohana",
+    "name": "hila",
+    "email": "bla",
+    "password": "password",
+}
 
+###
+// GET all users
+GET http://localhost:3000/users/
 
 ###
 //login

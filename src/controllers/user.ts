@@ -4,14 +4,14 @@ import mongoose from 'mongoose';
 
 // Create a new user
 export const createUser = async (req: Request, res: Response) => {
-  const {  username, name, email, password, birthDate } = req.body;
+  const {  username, name, email, password } = req.body;
 
-  if (!username || !name || !email || !password || !birthDate) {
-    return res.status(400).json({ message: 'sername, name, email, password and birthDate are required' });
+  if (!username || !name || !email || !password ) {
+    return res.status(400).json({ message: 'username, name, email and password are required' });
   }
 
   try {
-    const newUser = new User({ username, name, email, password, birthDate });
+    const newUser = new User({ username, name, email, password });
     await newUser.save();
     return res.status(201).json(newUser);
   } catch (error) {
