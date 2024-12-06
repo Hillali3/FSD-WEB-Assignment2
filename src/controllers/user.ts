@@ -1,21 +1,26 @@
 import { Request, Response } from 'express';
 import User from '../models/user';
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import { sendError } from '../utils/sendError';
 
 // Create a new user
 export const createUser = async (req: Request, res: Response) => {
-  const {  username, name, email, password, birthDate } = req.body;
+  const {  username, name, email, password } = req.body;
 
-  if (!username || !name || !email || !password || !birthDate) {
-    return res.status(400).json({ message: 'sername, name, email, password and birthDate are required' });
+  if (!username || !name || !email || !password ) {
+    return res.status(400).json({ message: 'username, name, email and password are required' });
   }
 
   try {
-    const newUser = new User({ username, name, email, password, birthDate });
+    const salt = await bcrypt.genSalt(10);
+    const encryptedPAssword = await bcrypt.hash(password, salt)
+
+    const newUser = new User({ username, name, email, password:  encryptedPAssword});
     await newUser.save();
     return res.status(201).json(newUser);
-  } catch (error) {
-    return res.status(500).json({ message: 'Error creating user', error });
+  } catch {
+    return sendError(res, 'Fail registration')
   }
 };
 
@@ -30,7 +35,7 @@ export const getUsers = async (req: Request, res: Response) => {
 };
 
 // Get user by id
-const getUserById = async (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -49,8 +54,8 @@ const getUserById = async (req: Request, res: Response) => {
 };
 
 // Get user by username
-const getUserByUsername = async (req: Request, res: Response) => {
-  const username = req.params.username;
+export const getUserByUsername = async (req: Request, res: Response) => {
+  const {username} = req.params;
 
   try {
     const user = await User.find({ username });
@@ -64,7 +69,7 @@ const getUserByUsername = async (req: Request, res: Response) => {
 };
 
 //update user by id
-const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
   const id = req.params.id;
   const  { name, password, email, birthDate } = req.body;
 
@@ -89,10 +94,10 @@ const updateUser = async (req: Request, res: Response) => {
 
 // Delete user by id
 export const deleteUser = async (req: Request, res: Response) => {
-  const userId = req.params.userId;
+  const id = req.params.id;
 
   try {
-    const deletedUser = await User.findByIdAndDelete(userId);
+    const deletedUser = await User.findByIdAndDelete(id);
     
     if (!deletedUser) {
       return res.status(404).json({ message: 'User not found' });

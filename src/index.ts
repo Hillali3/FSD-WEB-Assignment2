@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import postRoutes from './routes/post_route';
 import commentRoutes from './routes/comment_route';
 import userRoutes from './routes/user_route';
+import authRoutes from './routes/auth_route';
 import connectDB from './config/db';
 require("dotenv").config();
 
@@ -15,6 +16,7 @@ connectDB();
 app.use(express.json());
 
 // Register routes
+app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
 app.use('/users', userRoutes);
