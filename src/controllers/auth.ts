@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 import User from '../models/user';
-import { generateAccessToken, generateRefreshToken } from '../utils/jwtUtils';
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwtUtils';
 
 // User Registration
 export const register = async (req: Request, res: Response) => {
@@ -16,7 +16,7 @@ export const register = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, name, email, password: hashedPassword });
     await user.save();
-
+    
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
 
@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
       refreshToken,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error });
   }
 };
 
