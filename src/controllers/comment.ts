@@ -1,14 +1,16 @@
-import { Request, Response } from 'express';
-import Comment from '../models/comment';
-import Post from '../models/post';
-import User from '../models/user';
+import { Request, Response } from "express";
+import Comment from "../models/comment";
+import Post from "../models/post";
+import User from "../models/user";
 
 // Create a new comment
 export const createComment = async (req: Request, res: Response) => {
   const { postId, userId, text } = req.body;
 
   if (!postId || !userId || !text) {
-    return res.status(400).json({ message: 'PostId, UserId, and text are required' });
+    return res
+      .status(400)
+      .json({ message: "PostId, UserId, and text are required" });
   }
 
   try {
@@ -16,11 +18,11 @@ export const createComment = async (req: Request, res: Response) => {
     const user = await User.findById(userId);
 
     if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
+      return res.status(404).json({ message: "Post not found" });
     }
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     const newComment = new Comment({
@@ -33,7 +35,7 @@ export const createComment = async (req: Request, res: Response) => {
 
     return res.status(201).json(newComment);
   } catch (error) {
-    return res.status(500).json({ message: 'Error creating comment', error });
+    return res.status(500).json({ message: "Error creating comment", error });
   }
 };
 
@@ -45,12 +47,14 @@ export const getCommentsByPost = async (req: Request, res: Response) => {
     const comments = await Comment.find({ postId });
 
     if (comments.length === 0) {
-      return res.status(404).json({ message: 'No comments found for this post' });
+      return res
+        .status(404)
+        .json({ message: "No comments found for this post" });
     }
 
     return res.status(200).json(comments);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching comments', error });
+    return res.status(500).json({ message: "Error fetching comments", error });
   }
 };
 
@@ -59,15 +63,15 @@ export const getCommentById = async (req: Request, res: Response) => {
   const commentId = req.params.commentId;
 
   try {
-    const comment = await Comment.findById(commentId)
-    
+    const comment = await Comment.findById(commentId);
+
     if (!comment) {
-      return res.status(404).json({ message: 'Comment not found' });
+      return res.status(404).json({ message: "Comment not found" });
     }
 
     return res.status(200).json(comment);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching comment', error });
+    return res.status(500).json({ message: "Error fetching comment", error });
   }
 };
 
@@ -77,7 +81,9 @@ export const updateComment = async (req: Request, res: Response) => {
   const { text } = req.body;
 
   if (!text) {
-    return res.status(400).json({ message: 'Text is required to update the comment' });
+    return res
+      .status(400)
+      .json({ message: "Text is required to update the comment" });
   }
 
   try {
@@ -85,15 +91,15 @@ export const updateComment = async (req: Request, res: Response) => {
       commentId,
       { text },
       { new: true, runValidators: true }
-    )
-    
+    );
+
     if (!updatedComment) {
-      return res.status(404).json({ message: 'Comment not found' });
+      return res.status(404).json({ message: "Comment not found" });
     }
 
     return res.status(200).json(updatedComment);
   } catch (error) {
-    return res.status(500).json({ message: 'Error updating comment', error });
+    return res.status(500).json({ message: "Error updating comment", error });
   }
 };
 
@@ -103,13 +109,13 @@ export const deleteComment = async (req: Request, res: Response) => {
 
   try {
     const deletedComment = await Comment.findByIdAndDelete(commentId);
-    
+
     if (!deletedComment) {
-      return res.status(404).json({ message: 'Comment not found' });
+      return res.status(404).json({ message: "Comment not found" });
     }
 
-    return res.status(200).json({ message: 'Comment deleted successfully' });
+    return res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
-    return res.status(500).json({ message: 'Error deleting comment', error });
+    return res.status(500).json({ message: "Error deleting comment", error });
   }
 };
