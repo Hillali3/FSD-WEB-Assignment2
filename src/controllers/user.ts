@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import User from '../models/user';
+import mongoose from 'mongoose';
 
 // Create a new user
 export const createUser = async (req: Request, res: Response) => {
@@ -25,5 +26,65 @@ export const getUsers = async (req: Request, res: Response) => {
     return res.status(200).json(users);
   } catch (error) {
     return res.status(500).json({ message: 'Error fetching users', error });
+  }
+};
+
+// Get user by id
+const getUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User is not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user", error });
+  }
+};
+
+//update user by id
+const updateUser = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const  { name, password, email, birthDate } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid id" });
+  }
+  
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { name, password, email, birthDate },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+};
+
+// Delete user by id
+export const deleteUser = async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+
+  try {
+    const deletedUser = await User.findByIdAndDelete(userId);
+    
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ message: 'user deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error deleting user', error });
   }
 };

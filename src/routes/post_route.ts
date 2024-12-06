@@ -9,14 +9,14 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
     postController.getPosts(req, res);
 });
-router.put("/", (req, res) => {
-    postController.updatePost(req, res);
-});
 router.get("/", (req, res) => {
     postController.getPostById(req, res);
 });
 router.get("/", (req, res) => {
     postController.getPostByUserId(req, res);
+});
+router.put("/", (req, res) => {
+    postController.updatePost(req, res);
 });
 router.delete("/", (req, res) => {
     postController.deletePost(req, res);
