@@ -15,6 +15,9 @@ router.get("/", (req, res) => {
 router.get("/", (req, res) => {
     postController.getPostByUserId(req, res);
 });
+router.get("/", (req, res) => {
+    postController.getPostByUsername(req, res);
+});
 router.put("/", (req, res) => {
     postController.updatePost(req, res);
 });

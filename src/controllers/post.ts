@@ -59,7 +59,22 @@ const getPostByUserId = async (req: Request, res: Response) => {
     }
     return res.status(200).json(posts);
   } catch (error) {
-    return res.status(500).json({ message: 'Error fetching comments', error });
+    return res.status(500).json({ message: 'Error fetching posts', error });
+  }
+};
+
+// Get all posts by by username
+const getPostByUsername = async (req: Request, res: Response) => {
+  const username = req.params.username;
+
+  try {
+    const posts = await Post.find({ username });
+    if (posts.length === 0) {
+      return res.status(404).json({ message: 'No posts found for this username' });
+    }
+    return res.status(200).json(posts);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching posts', error });
   }
 };
 
