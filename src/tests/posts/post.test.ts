@@ -73,22 +73,22 @@ describe("Posts Test", () => {
     const response = await request(app)
       .get(`/posts/username/${userTest.username}`)
       .set("Authorization", `Bearer ${accessToken}`);
-    console.log(response.body);
-    console.log(userTest.username);
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
   });
-  // test("Delete Post", async () => {
-  //   const response = await request(app)
-  //     .delete(`/posts/${postId}`)
-  //     .set("Authorization", `Bearer ${accessToken}`);
-  //   expect(response.status).toBe(200);
-  // });
-  // test("Get All Posts after Delete", async () => {
-  //   const response = await request(app)
-  //     .get("/posts/")
-  //     .set("Authorization", `Bearer ${accessToken}`);
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.length).toBe(0);
-  // });
+  test("Delete Post", async () => {
+    const response = await request(app)
+      .delete(`/posts/${postId}`)
+      .set("Authorization", `Bearer ${accessToken}`);
+    console.log(response.body);
+    console.log(postId);
+    expect(response.status).toBe(200);
+  });
+  test("Get All Posts after Delete", async () => {
+    const response = await request(app)
+      .get("/posts/")
+      .set("Authorization", `Bearer ${accessToken}`);
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(0);
+  });
 });
