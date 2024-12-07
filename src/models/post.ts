@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 // Define the Post interface
 export interface Post extends Document {
-  user: mongoose.Schema.Types.ObjectId;
+  userId: mongoose.Schema.Types.ObjectId;
   title: String;
   content: String;
   creationDate: Date;
@@ -10,7 +10,7 @@ export interface Post extends Document {
 
 // Define the Post schema
 const postSchema: Schema = new Schema({
-  user: { 
+  userId: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'User',
     required: true 

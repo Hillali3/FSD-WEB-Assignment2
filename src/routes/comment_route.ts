@@ -1,7 +1,10 @@
 import { Router } from 'express';
 
+import { authenticateJWT } from "../middlewares/authMiddleware";
 const router = Router();
 const CommentController = require("../controllers/comment");
+
+router.use(authenticateJWT); // Add authentication middleware to all routes
 
 router.post("/", (req, res) => {
     CommentController.createComment(req, res);
