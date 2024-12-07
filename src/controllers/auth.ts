@@ -84,8 +84,6 @@ export const refreshToken = async (req: Request, res: Response) => {
       return res.status(403).json({ message: "Invalid request" });
     }
 
-    console.log(user);
-    console.log(user._id)
     const accessToken = generateAccessToken(user._id);
     const newRefreshToken = generateRefreshToken(user._id);
 
