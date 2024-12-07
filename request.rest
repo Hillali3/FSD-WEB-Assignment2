@@ -77,7 +77,7 @@ Content-Type: application/json
     "username": "hila.ohana",
     "name": "hila",
     "email": "bla",
-    "password": "password",
+    "password": "password"
 }
 
 ###
@@ -124,10 +124,10 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "hila.ohana@gmail.com",
-    "password": "qwe1234",
-    "name": "aviv2",
-    "username": "hila3W.ohana"
+    "email": "bla",
+    "password": "pass",
+    "name": "hila",
+    "username": "hila.ohana"
 }
 
 ###
