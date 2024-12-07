@@ -27,11 +27,13 @@ export const register = async (req: Request, res: Response) => {
 
     user.tokens = [refreshToken];
     await user.save();
+    const userId = user._id;
 
     res.status(201).json({
       message: "User registered successfully",
       accessToken,
       refreshToken,
+      userId,
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
@@ -117,5 +119,3 @@ export const logout = async (req: Request, res: Response) => {
   await user.save();
   res.status(200).json({ message: "Logged out successfully" });
 };
-
-

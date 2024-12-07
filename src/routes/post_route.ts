@@ -9,7 +9,7 @@ router.use(authenticateJWT); // Add authentication middleware to all routes
 router.post("/", (req, res) => {
   postController.createPost(req, res);
 });
-router.get("/", authenticateJWT, (req, res) => {
+router.get("/", (req, res) => {
   postController.getPosts(req, res);
 });
 router.get("/id/:id", (req, res) => {
