@@ -70,34 +70,34 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-// Logout (Invalidate the refresh token)
-export const logout = async (req: Request, res: Response) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
-  if (!token) {
-    return res.status(403).json({ message: "Access denied" });
-  }
+// // Logout (Invalidate the refresh token)
+// export const logout = async (req: Request, res: Response) => {
+//   const token = req.header("Authorization")?.replace("Bearer ", "");
+//   if (!token) {
+//     return res.status(403).json({ message: "Access denied" });
+//   }
 
-  try {
-    const decoded = verifyRefreshToken(token);
-    const userId = typeof decoded === "string" ? decoded : decoded.id;
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(403).json({ message: "Invalid request" });
-    }
+//   try {
+//     const decoded = verifyRefreshToken(token);
+//     const userId = typeof decoded === "string" ? decoded : decoded.id;
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(403).json({ message: "Invalid request" });
+//     }
 
-    if (!user.tokens.includes(token)) {
-      user.tokens = [""]; // Clear all tokens
-      await user.save();
-      return res.status(403).json({ message: "Invalid request" });
-    }
+//     if (!user.tokens.includes(token)) {
+//       user.tokens = [""]; // Clear all tokens
+//       await user.save();
+//       return res.status(403).json({ message: "Invalid request" });
+//     }
 
-    user.tokens.splice(user.tokens.indexOf(token), 1);
-    await user.save();
-    res.status(200).json({ message: "Logout successful" });
-  } catch (error) {
-    res.status(403).json({ message: "Invalid or expired token" });
-  }
-};
+//     user.tokens.splice(user.tokens.indexOf(token), 1);
+//     await user.save();
+//     res.status(200).json({ message: "Logout successful" });
+//   } catch (error) {
+//     res.status(403).json({ message: "Invalid or expired token" });
+//   }
+// };
 
 // Refresh Token
 export const refreshToken = async (req: Request, res: Response) => {
@@ -108,9 +108,7 @@ export const refreshToken = async (req: Request, res: Response) => {
   }
 
   try {
-    const decoded = verifyRefreshToken(token);
-    const userId = typeof decoded === "string" ? decoded : decoded.id;
-    const user = await User.findById(userId);
+    const user = await getUserFromToken(token);
     if (!user) {
       return res.status(404).json({ message: "Invalid request" });
     }
@@ -131,4 +129,11 @@ export const refreshToken = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(403).json({ message: "Invalid or expired token" });
   }
+};
+
+const getUserFromToken = async (token: string) => {
+  const decoded = verifyRefreshToken(token);
+  const userId = typeof decoded === "string" ? decoded : decoded.id;
+  const user = await User.findById(userId);
+  return user;
 };
