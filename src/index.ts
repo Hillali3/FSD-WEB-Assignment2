@@ -7,7 +7,7 @@ import connectDB from './config/db';
 import setupSwaggerDocs from './swagger';
 require("dotenv").config();
 
-const app = express();
+export const app = express();
 const port = process.env.PORT;
 
 // Connect to MongoDB
