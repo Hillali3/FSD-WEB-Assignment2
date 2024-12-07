@@ -80,8 +80,6 @@ describe("Posts Test", () => {
     const response = await request(app)
       .delete(`/posts/${postId}`)
       .set("Authorization", `Bearer ${accessToken}`);
-    console.log(response.body);
-    console.log(postId);
     expect(response.status).toBe(200);
   });
   test("Get All Posts after Delete", async () => {
