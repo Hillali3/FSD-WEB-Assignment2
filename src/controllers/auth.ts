@@ -70,35 +70,6 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-// // Logout (Invalidate the refresh token)
-// export const logout = async (req: Request, res: Response) => {
-//   const token = req.header("Authorization")?.replace("Bearer ", "");
-//   if (!token) {
-//     return res.status(403).json({ message: "Access denied" });
-//   }
-
-//   try {
-//     const decoded = verifyRefreshToken(token);
-//     const userId = typeof decoded === "string" ? decoded : decoded.id;
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res.status(403).json({ message: "Invalid request" });
-//     }
-
-//     if (!user.tokens.includes(token)) {
-//       user.tokens = [""]; // Clear all tokens
-//       await user.save();
-//       return res.status(403).json({ message: "Invalid request" });
-//     }
-
-//     user.tokens.splice(user.tokens.indexOf(token), 1);
-//     await user.save();
-//     res.status(200).json({ message: "Logout successful" });
-//   } catch (error) {
-//     res.status(403).json({ message: "Invalid or expired token" });
-//   }
-// };
-
 // Refresh Token
 export const refreshToken = async (req: Request, res: Response) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
@@ -109,23 +80,19 @@ export const refreshToken = async (req: Request, res: Response) => {
 
   try {
     const user = await getUserFromToken(token);
-    if (!user) {
-      return res.status(404).json({ message: "Invalid request" });
-    }
-
-    if (!user.tokens.includes(token)) {
-      user.tokens = [""];
-      await user.save();
+    if (!user || !user.tokens.includes(token)) {
       return res.status(403).json({ message: "Invalid request" });
     }
 
+    console.log(user);
+    console.log(user._id)
     const accessToken = generateAccessToken(user._id);
-    const refreshToken = generateRefreshToken(user._id);
+    const newRefreshToken = generateRefreshToken(user._id);
 
-    user.tokens[user.tokens.indexOf(token)] = refreshToken;
+    user.tokens[user.tokens.indexOf(token)] = newRefreshToken;
 
     await user.save();
-    res.status(200).json({ accessToken, refreshToken });
+    res.status(200).json({ accessToken, refreshToken: newRefreshToken });
   } catch (error) {
     res.status(403).json({ message: "Invalid or expired token" });
   }
@@ -133,7 +100,7 @@ export const refreshToken = async (req: Request, res: Response) => {
 
 const getUserFromToken = async (token: string) => {
   const decoded = verifyRefreshToken(token);
-  const userId = typeof decoded === "string" ? decoded : decoded.id;
+  const userId = typeof decoded === "string" ? decoded : decoded.userId;
   const user = await User.findById(userId);
   return user;
 };
