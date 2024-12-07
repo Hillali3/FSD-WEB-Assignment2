@@ -12,7 +12,6 @@ export const createPost = async (req: Request, res: Response) => {
 
   try {
     const newPost = new Post({ userId, title, content });
-    console.log(newPost);
     await newPost.save();
     return res.status(201).json(newPost);
   } catch (error) {
