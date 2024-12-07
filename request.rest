@@ -6,12 +6,13 @@ Content-Type: application/json
 {
     "title": "test_title2",
     "content": "test_content",
-    "userId": "bla"
+    "userId": "675455bdf4d2ffccb876c49a"
 }
 
 ###
 // GET all posts
 GET http://localhost:3000/posts/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU0NTViZGY0ZDJmZmNjYjg3NmM0OWEiLCJpYXQiOjE3MzM1ODAyMzQsImV4cCI6MTczMzY2NjYzNH0.-PKWuhe5zOI9xiR-ezUC-Gtcrv9wfxp-MYfCwcF7zMU
 
 ###
 // GET post by id
@@ -128,14 +129,9 @@ Content-Type: application/json
 ###
 // logout
 POST http://localhost:3000/auth/logout
-Content-Type: application/json
-
-{
-    "email": "hila.ohana@gmail.com",
-    "password": "qwe123"
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU0NTBiMGFhMTczNzJiYWNiZDMzZDYiLCJpYXQiOjE3MzM1Nzg5NDUsImV4cCI6MTczNDE4Mzc0NX0.8Qb5whxk3iXpsSkBxjFTkOdyQeMxcvYUzRGFTDVk684
 
 ###
 // Refresh token
 POST http://localhost:3000/auth/refreshToken
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU0NDY3OGY3M2M0ZGIzYjYwMTY3NDAiLCJpYXQiOjE3MzM1Nzc3ODYsImV4cCI6MTczNDE4MjU4Nn0.Kohn1ZU5ArFdTpGYgTvlTozRkma0YhKoyzkyLfu4KIM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU0NTBiMGFhMTczNzJiYWNiZDMzZDYiLCJpYXQiOjE3MzM1Nzg5MjgsImV4cCI6MTczNDE4MzcyOH0.WWaPJIDeIMSUnUeIyDGjZPYxMFZhs3SA4Sni4mnaM1I

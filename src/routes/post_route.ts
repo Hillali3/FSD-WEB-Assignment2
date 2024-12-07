@@ -1,14 +1,14 @@
 import { Router } from "express";
 
-import { authenticateJWT as authenticate } from "../middlewares/authMiddleware";
-
+import { authenticateJWT } from "../middlewares/authMiddleware";
+// const authenticateJWT = require("../middlewares/authMiddleware");
 const router = Router();
 const postController = require("../controllers/post");
 
 router.post("/", (req, res) => {
   postController.createPost(req, res);
 });
-router.get("/", (req, res) => {
+router.get("/", authenticateJWT, (req, res) => {
   postController.getPosts(req, res);
 });
 router.get("/id/:id", (req, res) => {
