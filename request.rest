@@ -110,7 +110,7 @@ Content-Type: application/json
 
 {
     "email": "hila.ohana@gmail.com",
-    "password": "qwe123"
+    "password": "qwe1234"
 }
 
 ###
@@ -119,7 +119,7 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "hila.ohana222@gmail.com",
+    "email": "hila.ohana@gmail.com",
     "password": "qwe1234",
     "name": "aviv2",
     "username": "hila3W.ohana"
@@ -134,3 +134,8 @@ Content-Type: application/json
     "email": "hila.ohana@gmail.com",
     "password": "qwe123"
 }
+
+###
+// Refresh token
+POST http://localhost:3000/auth/refreshToken
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU0NDY3OGY3M2M0ZGIzYjYwMTY3NDAiLCJpYXQiOjE3MzM1Nzc3ODYsImV4cCI6MTczNDE4MjU4Nn0.Kohn1ZU5ArFdTpGYgTvlTozRkma0YhKoyzkyLfu4KIM

@@ -1,28 +1,30 @@
-import { Router } from 'express';
+import { Router } from "express";
+
+import { authenticateJWT as authenticate } from "../middlewares/authMiddleware";
 
 const router = Router();
 const postController = require("../controllers/post");
 
 router.post("/", (req, res) => {
-  postController.createPost(req, res);
+  postController.createPost(req, res);
 });
 router.get("/", (req, res) => {
-    postController.getPosts(req, res);
+  postController.getPosts(req, res);
 });
 router.get("/id/:id", (req, res) => {
-    postController.getPostById(req, res);
+  postController.getPostById(req, res);
 });
 router.get("/userId/:userId", (req, res) => {
-    postController.getPostByUserId(req, res);
+  postController.getPostByUserId(req, res);
 });
 router.get("/username/:username", (req, res) => {
-    postController.getPostByUsername(req, res);
+  postController.getPostByUsername(req, res);
 });
 router.put("/:id", (req, res) => {
-    postController.updatePost(req, res);
+  postController.updatePost(req, res);
 });
 router.delete("/:id", (req, res) => {
-    postController.deletePost(req, res);
+  postController.deletePost(req, res);
 });
 
 export default router;
