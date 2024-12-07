@@ -27,13 +27,13 @@ export const register = async (req: Request, res: Response) => {
 
     user.tokens = [refreshToken];
     await user.save();
-    const userID = user._id;
+    const userId = user._id;
 
     res.status(201).json({
       message: "User registered successfully",
       accessToken,
       refreshToken,
-      userID,
+      userId,
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
