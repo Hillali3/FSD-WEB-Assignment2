@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 // Load environment variables
 import dotenv from "dotenv";
 import { UUID } from "crypto";
+import User from "../models/user";
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
@@ -30,4 +31,11 @@ export const verifyAccessToken = (token: string): string | jwt.JwtPayload => {
 // Verify Refresh Token
 export const verifyRefreshToken = (token: string): string | jwt.JwtPayload => {
   return jwt.verify(token, JWT_REFRESH_SECRET);
+};
+
+export const getUserFromToken = async (token: string) => {
+  const decoded = verifyRefreshToken(token);
+  const userId = typeof decoded === "string" ? decoded : decoded.userId;
+  const user = await User.findById(userId);
+  return user;
 };

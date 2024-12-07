@@ -4,7 +4,7 @@ import User from "../models/user";
 import {
   generateAccessToken,
   generateRefreshToken,
-  verifyRefreshToken,
+  getUserFromToken,
 } from "../utils/jwtUtils";
 
 // User Registration
@@ -96,7 +96,7 @@ export const refreshToken = async (req: Request, res: Response) => {
   }
 };
 
-const logout = async (req: Request, res: Response) => {
+export const logout = async (req: Request, res: Response) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
@@ -118,9 +118,4 @@ const logout = async (req: Request, res: Response) => {
   res.status(200).json({ message: "Logged out successfully" });
 };
 
-const getUserFromToken = async (token: string) => {
-  const decoded = verifyRefreshToken(token);
-  const userId = typeof decoded === "string" ? decoded : decoded.userId;
-  const user = await User.findById(userId);
-  return user;
-};
+
