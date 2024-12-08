@@ -13,6 +13,7 @@ let app: Express;
 let accessToken: string;
 let userId: UUID;
 let postId: UUID;
+let commentId: UUID;
 
 beforeAll(async () => {
   app = await initApp();
@@ -37,24 +38,16 @@ afterAll((done) => {
 describe("Posts Test", () => {
   test("Create Comment", async () => {
     const response = await request(app)
-      .post(`/posts/${postId}/comments`)
+      .post(`/comments`)
       .send({ ...comments[0], userId, postId })
       .set("Authorization", `Bearer ${accessToken}`);
-
+    commentId = response.body._id;
     expect(response.status).toBe(201);
     expect(response.body.text).toBe(comments[0].text);
     expect(response.body.userId).toBe(userId);
     expect(response.body.postId).toBe(postId);
   });
-  test("Get All Comments", async () => {
-    const response = await request(app)
-      .get(`/posts/${postId}/comments`)
-      .set("Authorization", `Bearer ${accessToken}`);
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
-  });
   test("Get Comment by ID", async () => {
-    const commentId = (await Comment.findOne({ postId }))?._id;
     const response = await request(app)
       .get(`/comments/id/${commentId}`)
       .set("Authorization", `Bearer ${accessToken}`);
@@ -71,7 +64,6 @@ describe("Posts Test", () => {
     expect(response.body.length).toBe(1);
   });
   test("Update Comment", async () => {
-    const commentId = (await Comment.findOne({ postId }))?._id;
     const response = await request(app)
       .put(`/comments/${commentId}`)
       .send({ text: "New Comment" })
@@ -80,7 +72,6 @@ describe("Posts Test", () => {
     expect(response.body.text).toBe("New Comment");
   });
   test("Delete Comment", async () => {
-    const commentId = (await Comment.findOne({ postId }))?._id;
     const response = await request(app)
       .delete(`/comments/${commentId}`)
       .set("Authorization", `Bearer ${accessToken}`);

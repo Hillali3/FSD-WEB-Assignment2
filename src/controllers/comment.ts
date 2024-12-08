@@ -6,7 +6,7 @@ import User from '../models/user';
 // Create a new comment
 export const createComment = async (req: Request, res: Response) => {
   const { postId, userId, text } = req.body;
-
+  console.log("req.body", req.body);
   if (!postId || !userId || !text) {
     return res.status(400).json({ message: 'PostId, UserId, and text are required' });
   }
@@ -56,7 +56,7 @@ export const getCommentsByPost = async (req: Request, res: Response) => {
 
 // Get a specific comment by id
 export const getCommentById = async (req: Request, res: Response) => {
-  const commentId = req.params.commentId;
+  const commentId = req.params.id;
 
   try {
     const comment = await Comment.findById(commentId)
@@ -73,7 +73,7 @@ export const getCommentById = async (req: Request, res: Response) => {
 
 // Update a comment
 export const updateComment = async (req: Request, res: Response) => {
-  const commentId = req.params.commentId;
+  const commentId = req.params.id;
   const { text } = req.body;
 
   if (!text) {
@@ -99,7 +99,7 @@ export const updateComment = async (req: Request, res: Response) => {
 
 // Delete a comment
 export const deleteComment = async (req: Request, res: Response) => {
-  const commentId = req.params.commentId;
+  const commentId = req.params.id;
 
   try {
     const deletedComment = await Comment.findByIdAndDelete(commentId);

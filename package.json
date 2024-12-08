@@ -19,7 +19,8 @@
     "build": "tsc",
     "dev": "nodemon ./src/app.ts",
     "test": "tsc && jest --detectOpenHandles --forceExit",
-    "test_p": "tsc && jest ./src/tests/posts/post.test.ts --detectOpenHandles --forceExit --coverage"
+    "test_p": "tsc && jest ./src/tests/posts/post.test.ts --detectOpenHandles --forceExit --coverage",
+    "test_c": "tsc && jest ./src/tests/comments/comment.test.ts --detectOpenHandles --forceExit --coverage"
   },
   "keywords": [],
   "author": "",
