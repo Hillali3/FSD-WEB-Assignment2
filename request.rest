@@ -38,11 +38,13 @@ Content-Type: application/json
 ###
 //CREATE new comment
 POST http://localhost:3000/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU1ZjE1NDMyMjZhOWZiNTIyZjYxNzIiLCJpYXQiOjE3MzM2ODU1ODgsImV4cCI6MTczMzc3MTk4OH0.01de45C7Syx5OBBJgrA-JpJKle3CaopZlIFa8f3xeOc
 Content-Type: application/json
 
 {
-    "content": "test_content",
-    "author": "hila"
+    "userId": "6755f103b49f3cb958269daa",
+    "postId": "6755f103b49f3cb958269dac",
+    "text": "bla"
 }
 
 ###
@@ -124,7 +126,7 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "bla",
+    "email": "blja",
     "password": "pass",
     "name": "hila",
     "username": "hila.ohana"
