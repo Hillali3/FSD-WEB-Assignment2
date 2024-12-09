@@ -65,4 +65,13 @@ describe("Token access", () => {
       .set({ authorization: "JWT" + accessToken });
     expect(response.status).toEqual(200);
   });
+
+  test("UnAuthorized access", async () => {
+    let wrongToken =
+      accessToken.slice(0, 6) + accessToken[10] + 1 + accessToken.slice(6 + 10);
+    const response = await request(app)
+      .get("/users")
+      .set({ authorization: "JWT" + wrongToken });
+    expect(response.status).not.toEqual(200);
+  });
 });
