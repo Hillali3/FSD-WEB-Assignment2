@@ -24,12 +24,12 @@ afterAll((done) => {
   done();
 });
 
-// describe("Restric access without auth /", () => {
-//   test("It should response with error", async () => {
-//     const response = await request(app).get("/users");
-//     expect(response.status).not.toEqual(200);
-//   });
-// });
+describe("Restric access without auth /", () => {
+  test("It should response with error", async () => {
+    const response = await request(app).get("/users");
+    expect(response.status).not.toEqual(200);
+  });
+});
 
 describe("Register", () => {
   test("Add new user", async () => {
