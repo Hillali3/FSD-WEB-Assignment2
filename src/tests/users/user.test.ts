@@ -36,9 +36,9 @@ describe("Users Test", () => {
     expect(response.body.password).toBe(users[0].password);
     expect(response.body.email).toBe(users[0].email);
   });
-  test("Get All Posts", async () => {
+  test("Get All Users", async () => {
     const response = await request(app)
-      .get("/posts/")
+      .get("/users/")
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
