@@ -1,7 +1,7 @@
 ###
 //CREATE new Post
 POST http://localhost:3000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU0NTViZGY0ZDJmZmNjYjg3NmM0OWEiLCJpYXQiOjE3MzM1ODAyMzQsImV4cCI6MTczMzY2NjYzNH0.-PKWuhe5zOI9xiR-ezUC-Gtcrv9wfxp-MYfCwcF7zMU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzU3MjE2MTFmMjUyNDEzMzEyNzRhOGEiLCJpYXQiOjE3MzM3NjUxMjksImV4cCI6MTczNDM2OTkyOX0.Iy2_FoLidm2PpOubNkXYbQJw9fAuxqqUfBqu5EmBIYg
 Content-Type: application/json
 
 {
