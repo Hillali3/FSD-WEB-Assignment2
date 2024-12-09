@@ -45,7 +45,7 @@ describe("Users Test", () => {
   });
   test("Get User by ID", async () => {
     const response = await request(app)
-      .get("/users/id/${userId}")
+      .get(`/users/id/${userId}`)
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
     expect(response.body.username).toBe(users[0].username);
@@ -53,13 +53,13 @@ describe("Users Test", () => {
     expect(response.body.password).toBe(users[0].password);
     expect(response.body.email).toBe(users[0].email);
   });
-  test("Update Post", async () => {
+  test("Update User", async () => {
     const response = await request(app)
-      .put(`/posts/${postId}`)
-      .send({ title: "New Title" })
+      .put(`/users/${userId}`)
+      .send({ password: "New Password" })
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
-    expect(response.body.title).toBe("New Title");
+    expect(response.body.password).toBe("New Password");
   });
   test("Get All Posts by User ID", async () => {
     const response = await request(app)
