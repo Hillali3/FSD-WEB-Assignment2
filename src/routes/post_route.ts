@@ -30,6 +30,8 @@ router.use(authenticate); // Add authentication middleware to all routes
  *                 type: string
  *               content:
  *                 type: string
+ *               userId:
+ *                 type: string
  *     responses:
  *       201:
  *         description: Post created successfully
@@ -45,8 +47,6 @@ router.post("/", (req, res) => {
  *   get:
  *     summary: Get all posts
  *     tags: [Posts]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of all posts
