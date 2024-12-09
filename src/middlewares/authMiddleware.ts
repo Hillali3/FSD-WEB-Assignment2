@@ -3,11 +3,7 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
-export const authenticate = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const authHeaders = req.headers["authorization"];
   const token = authHeaders && authHeaders.split(" ")[1];
   if (token == null) {
@@ -22,3 +18,5 @@ export const authenticate = (
     next();
   });
 };
+
+module.exports = authenticate;
