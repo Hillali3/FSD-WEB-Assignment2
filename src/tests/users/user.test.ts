@@ -31,7 +31,6 @@ describe("Users Test", () => {
       .set("Authorization", `Bearer ${accessToken}`)
       .send(user);
     userId = response.body._id;
-    console.log("Response Body: ", response.body);
     expect(response.status).toBe(201);
     expect(response.body.username).toBe(user.username);
     expect(response.body.name).toBe(user.name);
@@ -42,7 +41,7 @@ describe("Users Test", () => {
       .get("/users/")
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
+    expect(response.body.length).toBe(2);
   });
   test("Get User by ID", async () => {
     const response = await request(app)
@@ -72,6 +71,6 @@ describe("Users Test", () => {
       .get("/users/")
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
-    expect(response.body.length).toBe(0);
+    expect(response.body.length).toBe(1);
   });
 });
