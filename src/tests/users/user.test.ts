@@ -67,9 +67,9 @@ describe("Users Test", () => {
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
   });
-  test("Get All Posts after Delete", async () => {
+  test("Get All Users after Delete", async () => {
     const response = await request(app)
-      .get("/posts/")
+      .get("/users/")
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(0);
