@@ -43,16 +43,17 @@ describe("Register", () => {
   });
 });
 
-// describe("Login", () => {
-//   test("Login user", async () => {
-//     const response = await request(app).post("/auth/login").send({
-//       email: newUser.email,
-//       username: newUser.username,
-//       name: newUser.name,
-//     });
-//     accessToken = response.body.accessToken;
-//     refreshToken = response.body.refreshToken;
-//     expect(accessToken).not.toEqual(null);
-//     expect(refreshToken).not.toEqual(null);
-//   });
-// });
+describe("Login", () => {
+  test("Login user", async () => {
+    const response = await request(app).post("/auth/login").send({
+      email: "blja",
+      password: "pass",
+      name: "hila",
+      username: "hila.ohana",
+    });
+    accessToken = response.body.accessToken;
+    refreshToken = response.body.refreshToken;
+    expect(accessToken).not.toEqual(null);
+    expect(refreshToken).not.toEqual(null);
+  });
+});
