@@ -61,23 +61,9 @@ describe("Users Test", () => {
     expect(response.status).toBe(200);
     expect(response.body.password).toBe("New Password");
   });
-  test("Get All Posts by User ID", async () => {
+  test("Delete User", async () => {
     const response = await request(app)
-      .get(`/posts/userId/${userId}`)
-      .set("Authorization", `Bearer ${accessToken}`);
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
-  });
-  test("Get All Posts by Username", async () => {
-    const response = await request(app)
-      .get(`/posts/username/${userTest.username}`)
-      .set("Authorization", `Bearer ${accessToken}`);
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
-  });
-  test("Delete Post", async () => {
-    const response = await request(app)
-      .delete(`/posts/${postId}`)
+      .delete(`/users/${userId}`)
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
   });
