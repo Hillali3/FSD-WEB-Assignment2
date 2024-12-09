@@ -74,11 +74,11 @@ describe("Users Test", () => {
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
   });
-  // test("Get All Users after Delete", async () => {
-  //   const response = await request(app)
-  //     .get("/users/")
-  //     .set("Authorization", `Bearer ${accessToken}`);
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.length).toBe(0);
-  // });
+  test("Get All Users after Delete", async () => {
+    const response = await request(app)
+      .get("/users/")
+      .set("Authorization", `Bearer ${accessToken}`);
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(0);
+  });
 });
