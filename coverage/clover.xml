@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733739255728" clover="3.2.0">
-  <project timestamp="1733739255728" name="All files">
-    <metrics statements="393" coveredstatements="161" conditionals="69" coveredconditionals="1" methods="82" coveredmethods="12" elements="544" coveredelements="174" complexity="0" loc="393" ncloc="393" packages="8" files="18" classes="18"/>
+<coverage generated="1733739477911" clover="3.2.0">
+  <project timestamp="1733739477911" name="All files">
+    <metrics statements="392" coveredstatements="160" conditionals="69" coveredconditionals="1" methods="82" coveredmethods="12" elements="543" coveredelements="173" complexity="0" loc="392" ncloc="392" packages="8" files="18" classes="18"/>
     <package name="src">
       <metrics statements="34" coveredstatements="32" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="4"/>
       <file name="server.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\server.ts">
@@ -436,11 +436,10 @@
       </file>
     </package>
     <package name="src.tests.auth">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="authTestsData.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\tests\auth\authTestsData.ts">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.utils">
