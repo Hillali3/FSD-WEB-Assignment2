@@ -57,3 +57,12 @@ describe("Login", () => {
     expect(refreshToken).not.toEqual(null);
   });
 });
+
+describe("Token access", () => {
+  test("Authorized access", async () => {
+    const response = await request(app)
+      .get("/users")
+      .set({ authorization: "JWT" + accessToken });
+    expect(response.status).toEqual(200);
+  });
+});
