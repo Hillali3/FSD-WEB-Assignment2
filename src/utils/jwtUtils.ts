@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 
 // Load environment variables
 import dotenv from "dotenv";
-import { UUID } from "crypto";
 import User from "../models/user";
 dotenv.config();
 
