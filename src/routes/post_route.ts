@@ -39,13 +39,14 @@ router.use(authenticate); // Add authentication middleware to all routes
 router.post("/", (req, res) => {
   postController.createPost(req, res);
 });
-
 /**
  * @swagger
  * /posts:
  *   get:
  *     summary: Get all posts
  *     tags: [Posts]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: List of all posts

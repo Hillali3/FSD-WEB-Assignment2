@@ -6,6 +6,7 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const authHeaders = req.headers["authorization"];
   const token = authHeaders && authHeaders.split(" ")[1];
+  console.log(token)
   if (token == null) {
     return res.sendStatus(401);
   }

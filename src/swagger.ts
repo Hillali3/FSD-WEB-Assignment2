@@ -1,43 +1,36 @@
-import swaggerUi from 'swagger-ui-express';
-import { Express } from 'express';
-import swaggerJSDoc from 'swagger-jsdoc';
-import { Options } from 'swagger-jsdoc';
+import swaggerUi from "swagger-ui-express";
+import { Express } from "express";
+import swaggerJSDoc from "swagger-jsdoc";
+import { Options } from "swagger-jsdoc";
 
-
-// // Swagger definition
-// const swaggerDefinition = {
-//   openapi: '3.0.0',
-//   info: {
-//     title: 'Node API with Swagger',
-//     version: '1.0.0',
-//     description: 'This is a simple API for user authentication and data handling.',
-//   },
-//   servers: [
-//     {
-//       url: 'http://localhost:3000', 
-//     },
-//   ],
-// };
-
-// // Options for the swagger-jsdoc
-// const options = {
-//   swaggerDefinition,
-//   apis: ['./routes/*.ts'], 
-// };
 const options: Options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Your API Title',
+      title: 'Your API',
       version: '1.0.0',
     },
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+        },
+      },
+    },
+    security: [
+      {
+        BearerAuth: [],
+      },
+    ],
   },
-  apis: ['./src/routes/*.ts'], // Ensure this path matches your route files
+  apis: ['./src/routes/*.ts'], // Adjust this path
 };
 const swaggerSpec = swaggerJSDoc(options);
 
 const setupSwaggerDocs = (app: Express) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  console.log(JSON.stringify(swaggerSpec, null, 2));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
 
 export default setupSwaggerDocs;
