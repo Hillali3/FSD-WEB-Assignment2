@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733752407563" clover="3.2.0">
-  <project timestamp="1733752407563" name="All files">
-    <metrics statements="397" coveredstatements="181" conditionals="68" coveredconditionals="5" methods="83" coveredmethods="16" elements="548" coveredelements="202" complexity="0" loc="397" ncloc="397" packages="8" files="18" classes="18"/>
+<coverage generated="1733754879108" clover="3.2.0">
+  <project timestamp="1733754879108" name="All files">
+    <metrics statements="397" coveredstatements="199" conditionals="68" coveredconditionals="13" methods="83" coveredmethods="22" elements="548" coveredelements="234" complexity="0" loc="397" ncloc="397" packages="8" files="18" classes="18"/>
     <package name="src">
       <metrics statements="34" coveredstatements="32" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="4"/>
       <file name="server.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\server.ts">
@@ -63,9 +63,9 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="239" coveredstatements="59" conditionals="60" coveredconditionals="1" methods="44" coveredmethods="4"/>
+      <metrics statements="239" coveredstatements="71" conditionals="60" coveredconditionals="8" methods="44" coveredmethods="6"/>
       <file name="auth.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\controllers\auth.ts">
-        <metrics statements="61" coveredstatements="31" conditionals="22" coveredconditionals="1" methods="8" coveredmethods="4"/>
+        <metrics statements="61" coveredstatements="43" conditionals="22" coveredconditionals="8" methods="8" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -100,20 +100,20 @@
         <line num="63" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="77" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="79" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="77" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="79" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="85" count="1" type="cond" truecount="2" falsecount="1"/>
         <line num="86" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
         <line num="101" count="1" type="stmt"/>
         <line num="102" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="104" count="0" type="cond" truecount="0" falsecount="1"/>
@@ -323,10 +323,10 @@
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="8" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="9" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="3" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="2" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="15" count="0" type="stmt"/>
@@ -360,9 +360,9 @@
       </file>
     </package>
     <package name="src.routes">
-      <metrics statements="66" coveredstatements="46" conditionals="0" coveredconditionals="0" methods="22" coveredmethods="2"/>
+      <metrics statements="66" coveredstatements="47" conditionals="0" coveredconditionals="0" methods="22" coveredmethods="3"/>
       <file name="auth_route.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\routes\auth_route.ts">
-        <metrics statements="12" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
+        <metrics statements="12" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -371,7 +371,7 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
@@ -448,9 +448,9 @@
       </file>
     </package>
     <package name="src.utils">
-      <metrics statements="21" coveredstatements="14" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="2"/>
+      <metrics statements="21" coveredstatements="19" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="5"/>
       <file name="jwtUtils.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\utils\jwtUtils.ts">
-        <metrics statements="19" coveredstatements="13" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="2"/>
+        <metrics statements="19" coveredstatements="18" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -458,18 +458,18 @@
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="3" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
       </file>
       <file name="sendError.ts" path="C:\Users\97253\Desktop\projects\FSD-WEB-Assignment2\src\utils\sendError.ts">
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>

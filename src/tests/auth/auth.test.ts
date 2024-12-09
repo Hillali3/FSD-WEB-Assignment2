@@ -16,6 +16,7 @@ beforeAll(async () => {
   await User.deleteMany();
   const res = await request(app).post("/auth/register").send(userTest);
   accessToken = res.body.accessToken;
+  refreshToken = res.body.refreshToken;
   userId = res.body.userId;
 });
 
@@ -59,12 +60,12 @@ describe("Login", () => {
 });
 
 describe("Token access", () => {
-  // test("Authorized access", async () => {
-  //   const response = await request(app)
-  //     .get("/users")
-  //     .set({ authorization: "JWT" + accessToken });
-  //   expect(response.status).toEqual(200);
-  // });
+  //   test("Authorized access", async () => {
+  //     const response = await request(app)
+  //       .get("/users")
+  //       .set({ authorization: "JWT" + accessToken });
+  //     expect(response.status).toEqual(200);
+  //   });
 
   test("UnAuthorized access", async () => {
     let wrongToken =
@@ -76,15 +77,29 @@ describe("Token access", () => {
   });
 });
 
-// describe("Refresh token", () => {
-//   test("Refresh token", async () => {
-//     const response = await request(app)
-//       .get("/auth/refreshToken")
-//       .set({ authorization: "JWT" + accessToken });
-//     expect(response.statusCode).toEqual(200);
-//     const newAccessToken = response.body.accessToken;
-//     const newRefreshToken = response.body.refreshToken;
-//     expect(newAccessToken).toEqual(200);
-//     expect(newRefreshToken).toEqual(200);
-//   });
-// });
+describe("Refresh Token", () => {
+  test("Valid refresh token request", async () => {
+    const response = await request(app)
+      .post("/auth/refreshToken")
+      .set("Authorization", "Bearer " + refreshToken);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("accessToken");
+    expect(response.body).toHaveProperty("refreshToken");
+  });
+
+  test("Invalid token (missing or incorrect)", async () => {
+    const incorrectRefreshToken = "refreshToken";
+    const response = await request(app)
+      .post("/auth/refreshToken")
+      .set("Authorization", "Bearer " + incorrectRefreshToken);
+    expect(response.status).toBe(403);
+    expect(response.body.message).toBe("Invalid or expired token");
+  });
+
+  test("No token provided", async () => {
+    const response = await request(app).post("/auth/refreshToken");
+
+    expect(response.status).toBe(403);
+    expect(response.body.message).toBe("Access denied");
+  });
+});
