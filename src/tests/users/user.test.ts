@@ -43,14 +43,15 @@ describe("Users Test", () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
   });
-  test("Get Post by ID", async () => {
+  test("Get User by ID", async () => {
     const response = await request(app)
-      .get(`/posts/id/${postId}`)
+      .get("/users/id/${userId}")
       .set("Authorization", `Bearer ${accessToken}`);
     expect(response.status).toBe(200);
-    expect(response.body.title).toBe(posts[0].title);
-    expect(response.body.content).toBe(posts[0].content);
-    expect(response.body.userId).toBe(userId);
+    expect(response.body.username).toBe(users[0].username);
+    expect(response.body.name).toBe(users[0].name);
+    expect(response.body.password).toBe(users[0].password);
+    expect(response.body.email).toBe(users[0].email);
   });
   test("Update Post", async () => {
     const response = await request(app)
