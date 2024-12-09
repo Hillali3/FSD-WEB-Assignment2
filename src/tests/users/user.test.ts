@@ -54,20 +54,20 @@ describe("Users Test", () => {
     const response = await request(app)
       .get(`/users/id/${userId}`)
       .set("Authorization", `Bearer ${accessToken}`);
-    console.log({ respon: response.body });
     expect(response.status).toBe(200);
     expect(response.body.username).toBe(newUser.username);
     expect(response.body.name).toBe(newUser.name);
     expect(response.body.email).toBe(newUser.email);
   });
-  // test("Update User", async () => {
-  //   const response = await request(app)
-  //     .put(`/users/${userId}`)
-  //     .send({ password: "New Password" })
-  //     .set("Authorization", `Bearer ${accessToken}`);
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.password).toBe("New Password");
-  // });
+
+  test("Update User", async () => {
+    const response = await request(app)
+      .put(`/users/${userId}`)
+      .send({ name: "New Name" })
+      .set("Authorization", `Bearer ${accessToken}`);
+    expect(response.status).toBe(200);
+    expect(response.body.name).toBe("New Name");
+  });
   // test("Delete User", async () => {
   //   const response = await request(app)
   //     .delete(`/users/${userId}`)
