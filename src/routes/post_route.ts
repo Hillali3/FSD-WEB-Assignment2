@@ -1,11 +1,10 @@
 import { Router } from "express";
 
-const authenticate = require("../middlewares/authMiddleware");
 const postController = require("../controllers/post");
 const router = Router();
+import { authenticate } from "../middlewares/authMiddleware";
 
 router.use(authenticate); // Add authentication middleware to all routes
-
 router.post("/", (req, res) => {
   postController.createPost(req, res);
 });
