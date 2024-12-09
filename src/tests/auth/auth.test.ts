@@ -75,3 +75,16 @@ describe("Token access", () => {
     expect(response.status).not.toEqual(200);
   });
 });
+
+describe("Refresh token", () => {
+  test("Refresh token", async () => {
+    const response = await request(app)
+      .get("/auth/refreshToken")
+      .set({ authorization: "JWT" + accessToken });
+    expect(response.statusCode).toEqual(200);
+    const newAccessToken = response.body.accessToken;
+    const newRefreshToken = response.body.refreshToken;
+    expect(newAccessToken).toEqual(200);
+    expect(newRefreshToken).toEqual(200);
+  });
+});
