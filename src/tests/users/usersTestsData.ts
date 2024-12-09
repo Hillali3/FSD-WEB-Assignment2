@@ -6,3 +6,10 @@ export const users = [
     password: "pass",
   },
 ];
+
+export const user = {
+  username: "hila.ohana",
+  name: "hila",
+  email: "hila@example.com",
+  password: "pass",
+};
