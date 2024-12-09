@@ -50,16 +50,16 @@ describe("Users Test", () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
   });
-  // test("Get User by ID", async () => {
-  //   const response = await request(app)
-  //     .get(`/users/id/${userId}`)
-  //     .set("Authorization", `Bearer ${accessToken}`);
-  //   console.log({ respon: response.body });
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.username).toBe(newUser.username);
-  //   expect(response.body.name).toBe(newUser.name);
-  //   expect(response.body.email).toBe(newUser.email);
-  // });
+  test("Get User by ID", async () => {
+    const response = await request(app)
+      .get(`/users/id/${userId}`)
+      .set("Authorization", `Bearer ${accessToken}`);
+    console.log({ respon: response.body });
+    expect(response.status).toBe(200);
+    expect(response.body.username).toBe(newUser.username);
+    expect(response.body.name).toBe(newUser.name);
+    expect(response.body.email).toBe(newUser.email);
+  });
   // test("Update User", async () => {
   //   const response = await request(app)
   //     .put(`/users/${userId}`)
