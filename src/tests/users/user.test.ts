@@ -68,12 +68,12 @@ describe("Users Test", () => {
     expect(response.status).toBe(200);
     expect(response.body.name).toBe("New Name");
   });
-  // test("Delete User", async () => {
-  //   const response = await request(app)
-  //     .delete(`/users/${userId}`)
-  //     .set("Authorization", `Bearer ${accessToken}`);
-  //   expect(response.status).toBe(200);
-  // });
+  test("Delete User", async () => {
+    const response = await request(app)
+      .delete(`/users/${userId}`)
+      .set("Authorization", `Bearer ${accessToken}`);
+    expect(response.status).toBe(200);
+  });
   // test("Get All Users after Delete", async () => {
   //   const response = await request(app)
   //     .get("/users/")
