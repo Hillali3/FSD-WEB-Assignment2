@@ -13,7 +13,7 @@ let userId: UUID;
 beforeAll(async () => {
   app = await initApp();
   await User.deleteMany();
-  const res = await request(app).post("/auth/register").send(userTest);
+  const res = await request(app).post("/auth/register").send(users[0]);
   accessToken = res.body.accessToken;
   userId = res.body.userId;
 });
