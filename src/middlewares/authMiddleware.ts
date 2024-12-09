@@ -1,22 +1,22 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import { verifyAccessToken } from "../utils/jwtUtils";
 
-const JWT_SECRET = process.env.JWT_SECRET as string;
+export const authenticate = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.header("Authorization")?.replace("Bearer ", "");
 
-const authenticate = (req: Request, res: Response, next: NextFunction) => {
-  const authHeaders = req.headers["authorization"];
-  const token = authHeaders && authHeaders.split(" ")[1];
-  if (token == null) {
-    return res.sendStatus(401);
+  if (!token) {
+    return res.status(403).json({ message: "Access denied" });
   }
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).send(err.message);
-    }
-    req.user = user;
+  try {
+    const decoded = verifyAccessToken(token);
+    req.user = decoded;
     next();
-  });
+  } catch (error) {
+    res.status(403).json({ message: "Invalid or expired token" });
+  }
 };
-
-module.exports = authenticate;

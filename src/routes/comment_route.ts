@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-const authenticate = require("../middlewares/authMiddleware");
 const router = Router();
 const CommentController = require("../controllers/comment");
+import { authenticate } from "../middlewares/authMiddleware";
 
 router.use(authenticate); // Add authentication middleware to all routes
 
